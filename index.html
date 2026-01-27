@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freedom Tech Summit 2026 | Prague</title>
+    <meta name="description" content="Freedom Tech Summit - A one-day conference for developers, hackers, and tech enthusiasts diving deep into Bitcoin, Lightning, Cashu, Nostr, Meshcore, and cutting-edge freedom technologies. June 10, 2026 in Prague.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'freedom': {
+                            'dark': '#0a0a0f',
+                            'darker': '#050508',
+                            'card': '#12121a',
+                            'border': '#1e1e2e',
+                            'orange': '#f7931a',
+                            'purple': '#8b5cf6',
+                            'teal': '#14b8a6',
+                        },
+                        'neon': '#00ff41',
+                        'terminal': '#0d0d0d',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap');
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00ff41 0%, #f7931a 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-border {
+            background: linear-gradient(135deg, #00ff41, #f7931a, #8b5cf6);
+        }
+
+        .card-glow:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.15);
+        }
+
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Noise/grain overlay */
+        .noise::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Glitch text animation */
+        @keyframes glitch {
+            0% {
+                text-shadow: 0.05em 0 0 rgba(247, 147, 26, 0.75),
+                            -0.05em -0.025em 0 rgba(0, 255, 65, 0.75),
+                            0.025em 0.05em 0 rgba(139, 92, 246, 0.75);
+            }
+            14% {
+                text-shadow: 0.05em 0 0 rgba(247, 147, 26, 0.75),
+                            -0.05em -0.025em 0 rgba(0, 255, 65, 0.75),
+                            0.025em 0.05em 0 rgba(139, 92, 246, 0.75);
+            }
+            15% {
+                text-shadow: -0.05em -0.025em 0 rgba(139, 92, 246, 0.75),
+                            0.025em 0.025em 0 rgba(247, 147, 26, 0.75),
+                            -0.05em -0.05em 0 rgba(0, 255, 65, 0.75);
+            }
+            49% {
+                text-shadow: -0.05em -0.025em 0 rgba(139, 92, 246, 0.75),
+                            0.025em 0.025em 0 rgba(247, 147, 26, 0.75),
+                            -0.05em -0.05em 0 rgba(0, 255, 65, 0.75);
+            }
+            50% {
+                text-shadow: 0.025em 0.05em 0 rgba(0, 255, 65, 0.75),
+                            0.05em 0 0 rgba(139, 92, 246, 0.75),
+                            0 -0.05em 0 rgba(247, 147, 26, 0.75);
+            }
+            99% {
+                text-shadow: 0.025em 0.05em 0 rgba(0, 255, 65, 0.75),
+                            0.05em 0 0 rgba(139, 92, 246, 0.75),
+                            0 -0.05em 0 rgba(247, 147, 26, 0.75);
+            }
+            100% {
+                text-shadow: -0.025em 0 0 rgba(247, 147, 26, 0.75),
+                            -0.025em -0.025em 0 rgba(0, 255, 65, 0.75),
+                            -0.025em -0.05em 0 rgba(139, 92, 246, 0.75);
+            }
+        }
+
+        .glitch {
+            animation: glitch 858ms infinite;
+        }
+
+        .glitch:hover {
+            animation: glitch 429ms infinite;
+        }
+
+        /* Scanlines overlay */
+        .scanlines::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            opacity: 0.3;
+        }
+
+        /* Blinking cursor */
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .cursor::after {
+            content: '_';
+            animation: blink 1s infinite;
+            color: #00ff41;
+        }
+
+        /* Speaker photo filter — tweak values here */
+        .speaker-photo {
+            filter: grayscale(100%) contrast(200%) brightness(300%);
+        }
+
+        /* Terminal box styling */
+        .terminal-box {
+            border: 1px dashed #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0, 255, 65, 0.03);
+        }
+
+        /* Terminal header */
+        .terminal-header {
+            border-bottom: 1px dashed #00ff41;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            color: #00ff41;
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        /* Icon styles using mask-image for color inheritance */
+        .icon {
+            display: inline-block;
+            background-color: currentColor;
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+        }
+        .icon-github { -webkit-mask-image: url('images/icons/github.svg'); mask-image: url('images/icons/github.svg'); }
+        .icon-x { -webkit-mask-image: url('images/icons/x.svg'); mask-image: url('images/icons/x.svg'); }
+        .icon-nostr { -webkit-mask-image: url('images/icons/nostr.svg'); mask-image: url('images/icons/nostr.svg'); }
+        .icon-linkedin { -webkit-mask-image: url('images/icons/linkedin.svg'); mask-image: url('images/icons/linkedin.svg'); }
+        .icon-signal { -webkit-mask-image: url('images/icons/signal.svg'); mask-image: url('images/icons/signal.svg'); }
+        .icon-website { -webkit-mask-image: url('images/icons/website.svg'); mask-image: url('images/icons/website.svg'); }
+
+        /* Neon glow effect */
+        .neon-glow {
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5),
+                         0 0 20px rgba(0, 255, 65, 0.3),
+                         0 0 30px rgba(0, 255, 65, 0.2);
+        }
+
+        /* Border glow on hover */
+        .border-glow:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3),
+                        inset 0 0 20px rgba(0, 255, 65, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-freedom-dark text-gray-100">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur bg-terminal/90 border-b border-neon/30 scanlines">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-2">
+                    <span class="text-neon font-bold text-lg">&gt;_</span>
+                    <span class="text-xl font-bold gradient-text">Freedom_Tech_Summit</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-400 hover:text-neon transition-colors text-sm">[about]</a>
+                    <a href="#tickets" class="text-gray-400 hover:text-neon transition-colors text-sm">[tickets]</a>
+                    <a href="#cfp" class="text-gray-400 hover:text-neon transition-colors text-sm">[participate]</a>
+                    <a href="#speakers" class="text-gray-400 hover:text-neon transition-colors text-sm">[speakers]</a>
+                    <a href="#venue" class="text-gray-400 hover:text-neon transition-colors text-sm">[venue]</a>
+                    <a href="#organizers" class="text-gray-400 hover:text-neon transition-colors text-sm">[organizers]</a>
+                    <a href="https://tickets.freedomtechsummit.com/" class="px-4 py-2 border border-neon text-neon hover:bg-neon hover:text-terminal font-semibold transition-all text-sm">
+                        GET_TICKETS
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-neon hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar -->
+    <div id="mobile-sidebar" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80" id="sidebar-overlay"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-72 bg-terminal border-l border-neon/30 transform transition-transform">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-8">
+                    <span class="text-lg font-bold text-neon">&gt; MENU</span>
+                    <button id="close-sidebar" class="p-2 text-neon hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="flex flex-col space-y-4">
+                    <a href="#about" class="sidebar-link text-gray-400 hover:text-neon py-2 transition-colors">&gt; about</a>
+                    <a href="#tickets" class="sidebar-link text-gray-400 hover:text-neon py-2 transition-colors">&gt; tickets</a>
+                    <a href="#cfp" class="sidebar-link text-gray-400 hover:text-neon py-2 transition-colors">&gt; participate</a>
+                    <a href="#speakers" class="sidebar-link text-gray-400 hover:text-neon py-2 transition-colors">&gt; speakers</a>
+                    <a href="#venue" class="sidebar-link text-gray-400 hover:text-neon py-2 transition-colors">&gt; venue</a>
+                    <a href="#organizers" class="sidebar-link text-gray-400 hover:text-neon py-2 transition-colors">&gt; organizers</a>
+                    <a href="https://tickets.freedomtechsummit.com/" class="mt-4 px-4 py-3 border border-neon text-neon hover:bg-neon hover:text-terminal font-semibold text-center transition-all">
+                        GET_TICKETS
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 noise">
+        <!-- Background gradient -->
+        <div class="absolute inset-0 bg-gradient-to-br from-neon/5 via-terminal to-freedom-orange/5"></div>
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-neon/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-freedom-orange/10 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
+            <p class="text-gray-500 mb-8 max-w-2xl mx-auto text-sm">
+                // The evolution of dev/hack/day
+            </p>
+            <p class="text-gray-500 mb-8 max-w-2xl mx-auto text-sm">
+                // From Bitcoin to Lightning to Cashu to Nostr to Meshcore and beyond
+            </p>
+
+            <div class="mb-6 text-neon/60 text-sm">
+                <span>&gt; initializing ...</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-6">
+                <span class="gradient-text glitch">Freedom_Tech_</span>
+                <br>
+                <span class="text-white neon-glow">Summit<span class="text-neon">_</span></span>
+            </h1>
+
+            <p class="text-xl sm:text-2xl text-gray-400 mb-8 max-w-3xl mx-auto">
+                <span class="text-neon">&gt;</span> Get Hands-On with the Future of Freedom Tech
+            </p>
+
+            <div class="inline-flex items-center px-4 py-2 border border-dashed border-neon/50 mb-8 text-xl">
+                <span class="text-neon font-medium">2026-06-10</span>
+                <span class="mx-3 text-neon/50">|</span>
+                <span class="text-gray-400">PRAGUE, CZE</span>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://tickets.freedomtechsummit.com/" class="w-full sm:w-auto px-8 py-4 bg-neon hover:bg-neon/90 text-terminal font-bold text-lg transition-all hover:shadow-lg hover:shadow-neon/30">
+                    ./GET_TICKET
+                </a>
+                <a href="#about" class="w-full sm:w-auto px-8 py-4 border border-dashed border-neon/50 hover:border-neon text-neon font-semibold text-lg transition-colors">
+                    [LEARN_MORE]
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 sm:py-32 relative noise">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="text-neon text-sm mb-4">&gt; cat ./about.txt</p>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">What is <span class="gradient-text">Freedom_Tech_Summit</span>?</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">// A dedicated one-day, in-person-only conference for those who build the future</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div class="terminal-box p-6">
+                    <div class="terminal-header -mx-6 -mt-6 mb-6">
+                        <span>user@freedom-tech:~$</span>
+                    </div>
+                    <p class="text-lg text-gray-300 mb-6">
+                        <span class="text-neon">&gt;</span> Are you ready to stay at the forefront of freedom technology innovation?
+                    </p>
+                    <p class="text-gray-400 mb-6 text-sm">
+                        Freedom Tech Summit is happening right before BTC Prague 2026 - designed for developers, hackers, tech enthusiasts, and curious minds who want to dive deep into breakthrough ideas and cutting-edge technology.
+                    </p>
+                    <p class="text-gray-400 mb-6 text-sm">
+                        Born from the legendary dev/hack/day events, we've expanded our horizons.
+                        We started with <span class="border border-dashed border-freedom-orange/50 text-freedom-orange px-1.5 py-0.5">Bitcoin</span>,
+                        continued with <span class="border border-dashed border-neon/50 text-neon px-1.5 py-0.5">Lightning</span>,
+                        then embraced <span class="border border-dashed border-freedom-purple/50 text-freedom-purple px-1.5 py-0.5">Cashu</span>
+                        and <span class="border border-dashed border-freedom-purple/50 text-freedom-purple px-1.5 py-0.5">Nostr</span>,
+                        and now we're wrapping our heads around all freedom technologies including
+                        <span class="border border-dashed border-freedom-teal/50 text-freedom-teal px-1.5 py-0.5">Meshcore</span>
+                        and other decentralized systems that empower individuals.
+                    </p>
+                    <p class="text-gray-400 text-sm">
+                        If you're serious about development, hacking, and experimentation in the freedom tech space, this is where you need to be.<span class="cursor"></span>
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="terminal-box p-6 border-glow transition-all">
+                        <div class="text-freedom-orange text-3xl mb-3">
+                            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-white mb-2">[TECH_TALKS]</h3>
+                        <p class="text-gray-500 text-sm">Unveiling the latest developments in freedom tech</p>
+                    </div>
+                    <div class="terminal-box p-6 border-glow transition-all">
+                        <div class="text-neon text-3xl mb-3">
+                            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M16 17v2H2v-2s0-4 7-4 7 4 7 4m-3.5-9.5A3.5 3.5 0 1 0 9 11a3.5 3.5 0 0 0 3.5-3.5m3.44 5.5A5.32 5.32 0 0 1 18 17v2h4v-2s0-3.63-6.06-4M15 4a3.39 3.39 0 0 0-1.93.59 5 5 0 0 1 0 5.82A3.39 3.39 0 0 0 15 11a3.5 3.5 0 0 0 0-7Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-white mb-2">[NETWORKING]</h3>
+                        <p class="text-gray-500 text-sm">High-signal connections with top builders & experts</p>
+                    </div>
+                    <div class="terminal-box p-6 border-glow transition-all">
+                        <div class="text-freedom-purple text-3xl mb-3">
+                            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 512 512">
+                                <path d="M64 32C28.7 32 0 60.7 0 96L0 352c0 35.3 28.7 64 64 64l144 0-16 48-72 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l272 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-72 0-16-48 144 0c35.3 0 64-28.7 64-64l0-256c0-35.3-28.7-64-64-64L64 32zM96 96l320 0c17.7 0 32 14.3 32 32l0 160c0 17.7-14.3 32-32 32L96 320c-17.7 0-32-14.3-32-32l0-160c0-17.7 14.3-32 32-32z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-white mb-2">[HANDS_ON]</h3>
+                        <p class="text-gray-500 text-sm">Workshops and hacking sessions</p>
+                    </div>
+                    <div class="terminal-box p-6 border-glow transition-all">
+                        <div class="text-freedom-teal text-3xl mb-3">
+                            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8.1 13.34l2.83-2.83L3.91 3.5a4.008 4.008 0 0 0 0 5.66l4.19 4.18m6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.65.81-6.12-1.46-1.46-4.2-1.1-6.12.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-white mb-2">[CATERING & AFTER_PARTY]</h3>
+                        <p class="text-gray-500 text-sm">Great food, drinks, and company</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tickets -->
+            <div id="tickets" class="mt-60">
+                <div class="text-center mb-12">
+                    <p class="text-freedom-orange text-sm mb-4">&gt; ./purchase_ticket --now</p>
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-4">Get Your <span class="gradient-text">[TICKET]</span></h3>
+                    <p class="text-gray-400 max-w-2xl mx-auto">// Join 100+ builders, hackers, and freedom tech enthusiasts</p>
+                </div>
+
+                <!-- CTA -->
+                <div class="text-center">
+                    <div class="inline-block border border-dashed border-freedom-orange/50 p-6 sm:p-8 mb-8">
+                        <p class="text-freedom-orange text-sm mb-2 font-medium">// EARLY_BIRD_PRICING</p>
+                        <p class="text-4xl sm:text-5xl font-bold text-white neon-glow-orange mb-2">135 EUR</p>
+                        <p class="text-gray-500 text-sm">// Limited availability!</p>
+                    </div>
+                    <br>
+                    <a href="https://tickets.freedomtechsummit.com/" class="inline-flex items-center px-10 py-5 bg-neon hover:bg-neon/90 text-terminal font-bold text-xl transition-all hover:shadow-lg hover:shadow-neon/30">
+                        ./BUY_TICKET_NOW
+                        <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                    <p class="text-neon/60 mt-4 text-sm">// LIMITED_SPOTS_AVAILABLE</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call for Participation Section -->
+    <section id="cfp" class="py-20 sm:py-32 relative noise">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="terminal-box p-8 sm:p-12 lg:p-16 text-center relative overflow-hidden">
+                <div class="terminal-header -mx-8 sm:-mx-12 lg:-mx-16 -mt-8 sm:-mt-12 lg:-mt-16 mb-8">
+                    <span>root@freedom-tech:~/cfp$ ./submit_proposal.sh</span>
+                </div>
+
+                <div class="absolute top-0 right-0 w-64 h-64 bg-neon/10 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-freedom-orange/10 rounded-full blur-3xl"></div>
+
+                <div class="relative z-10">
+                    <div class="inline-flex items-center px-4 py-2 border border-dashed border-freedom-purple/50 mb-6">
+                        <span class="text-freedom-purple font-medium text-sm">[CALL_FOR_PARTICIPATION]</span>
+                    </div>
+
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-6">Share Your <span class="gradient-text">Knowledge</span></h2>
+
+                    <p class="text-gray-400 max-w-2xl mx-auto mb-8">
+                        // Have something to share with the freedom tech community?
+                    </p>
+
+                    <div class="grid sm:grid-cols-3 gap-6 mb-10 max-w-3xl mx-auto text-left">
+                        <div class="flex items-start">
+                            <span class="text-neon mr-3 font-bold">&gt;</span>
+                            <span class="text-gray-300 text-sm">Technical talks</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-neon mr-3 font-bold">&gt;</span>
+                            <span class="text-gray-300 text-sm">Hands-on workshops</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-freedom-orange mr-3 font-bold">&gt;</span>
+                            <span class="text-gray-300 text-sm">Panel discussions</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-freedom-orange mr-3 font-bold">&gt;</span>
+                            <span class="text-gray-300 text-sm">Live demos</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-freedom-purple mr-3 font-bold">&gt;</span>
+                            <span class="text-gray-300 text-sm">Socratic seminars</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-freedom-purple mr-3 font-bold">&gt;</span>
+                            <span class="text-gray-300 text-sm">Hack sessions</span>
+                        </div>
+                    </div>
+
+                    <a href="https://program.freedomtechsummit.com/" class="inline-flex items-center px-8 py-4 bg-neon hover:bg-neon/90 text-terminal font-bold text-lg transition-all hover:shadow-lg hover:shadow-neon/30">
+                        ./SUBMIT_PROPOSAL
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speakers Section -->
+    <section id="speakers" class="py-20 sm:py-32 bg-terminal relative overflow-hidden scanlines">
+        <div class="absolute inset-0 bg-gradient-to-b from-neon/5 to-transparent"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="text-neon text-sm mb-4">&gt; ls ./speakers/</p>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4"><span class="gradient-text">[SPEAKERS]</span> & [PROJECTS]</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">// 2026 lineup coming soon.</p>
+                <p class="text-gray-400 max-w-2xl mx-auto mt-8">// Here are some amazing people and projects from previous dev/hack/day editions.</p>
+            </div>
+
+            <!-- Past Speakers -->
+            <div class="mb-16">
+                <h3 class="text-xl font-bold text-freedom-orange mb-8 text-center">&gt;&gt;&gt; PAST_SPEAKERS &lt;&lt;&lt;</h3>
+                <div id="speakers-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Speakers will be dynamically generated -->
+                </div>
+                <div id="speakers-show-more" class="text-center mt-8 hidden">
+                    <button onclick="showMoreSpeakers()" class="px-6 py-3 border border-dashed border-freedom-orange/50 text-freedom-orange hover:bg-freedom-orange hover:text-terminal font-semibold transition-all text-sm">
+                        [SHOW_MORE_SPEAKERS]
+                    </button>
+                </div>
+            </div>
+
+            <!-- Past Projects -->
+            <div>
+                <h3 class="text-xl font-bold text-freedom-purple mb-8 text-center">&gt;&gt;&gt; PAST_PROJECTS &lt;&lt;&lt;</h3>
+                <div id="projects-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Projects will be dynamically generated -->
+                </div>
+                <div id="projects-show-more" class="text-center mt-8 hidden">
+                    <button onclick="showMoreProjects()" class="px-6 py-3 border border-dashed border-freedom-purple/50 text-freedom-purple hover:bg-freedom-purple hover:text-terminal font-semibold transition-all text-sm">
+                        [SHOW_MORE_PROJECTS]
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Venue Section -->
+    <section id="venue" class="py-20 sm:py-32 relative noise">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="text-neon text-sm mb-4">&gt; locate --venue</p>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">The <span class="gradient-text">[VENUE]</span></h2>
+            </div>
+
+            <div class="max-w-2xl mx-auto">
+                <div class="terminal-box p-8">
+                    <div class="terminal-header -mx-8 -mt-8 mb-6">
+                        <span>user@freedom-tech:~/venue$</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-freedom-orange mb-4">&gt; HOTEL_DUO</h3>
+                    <p class="text-gray-400 mb-6 text-sm">
+                        All meeting rooms available in the hotel are booked exclusively for Freedom Tech Summit on June 10.
+                    </p>
+
+                    <div class="flex items-start mb-6">
+                        <span class="text-neon mr-4 font-bold">&gt;</span>
+                        <div>
+                            <p class="text-white font-medium">ADDRESS:</p>
+                            <p class="text-gray-400 text-sm">Teplická 492, 190 00 Praha 9</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start mb-8">
+                        <span class="text-neon mr-4 font-bold">&gt;</span>
+                        <div>
+                            <p class="text-white font-medium">COORDINATES:</p>
+                            <p class="text-gray-400 text-sm">50.127063, 14.485688</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://hotel.freedomtechsummit.com/" class="inline-flex items-center px-6 py-3 border border-dashed border-freedom-orange text-freedom-orange hover:bg-freedom-orange hover:text-terminal font-semibold transition-all">
+                            ./BOOK_HOTEL
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                        <a href="https://maps.app.goo.gl/6b51UneySz5U7nYG9" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 border border-dashed border-neon/50 text-neon hover:bg-neon hover:text-terminal font-semibold transition-all">
+                            ./SHOW_ON_MAP
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organized By Section -->
+    <section id="organizers" class="py-20 sm:py-32 bg-terminal relative overflow-hidden scanlines">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-freedom-purple/5 to-transparent"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="text-freedom-purple text-sm mb-4">&gt; whoami --organizers</p>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Organized by <span class="gradient-text">[VEXL_FOUNDATION]</span></h2>
+            </div>
+
+            <!-- Vexl Foundation Card -->
+            <div class="max-w-2xl mx-auto mb-16">
+                <div class="terminal-box p-8 text-center border-glow transition-all">
+                    <img src="images/organizers/vexl-foundation.png" alt="Vexl Foundation" class="w-72 h-72 mx-auto mb-6 object-contain">
+                    <h3 class="text-2xl font-bold text-neon mb-3">&gt; VEXL_FOUNDATION</h3>
+                    <p class="text-freedom-orange font-medium mb-4 text-sm">// Defending individual financial freedom</p>
+                    <p class="text-gray-400 mb-6 text-sm">In response to the ongoing erosion of individual financial freedoms and the increasing threats to privacy and autonomy, this foundation seeks to support and fund open source projects that not only elucidate these issues but also tackle them by providing practical tools.</p>
+                    <a href="https://vexl.foundation" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-neon hover:text-neon/80 font-medium transition-colors text-sm">
+                        [vexl.foundation]
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Organizers -->
+            <div class="text-center mb-10">
+                <p class="text-freedom-purple/60 text-sm">&gt;&gt;&gt; TEAM_BEHIND_THE_SUMMIT &lt;&lt;&lt;</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                <!-- Pavol Rusnak -->
+                <div class="terminal-box p-8 text-center border-glow transition-all">
+                    <img src="images/organizers/stick.png" alt="Pavol Rusnak" class="w-36 h-36 rounded-full mx-auto mb-6 object-cover border-2 border-neon/30 bg-white">
+                    <h3 class="text-xl font-bold text-white mb-2">Pavol Rusnak</h3>
+                    <p class="text-gray-400 mb-6 text-sm">// Board Member, Vexl Foundation</p>
+
+                    <!-- Social Links -->
+                    <div class="flex justify-center space-x-4">
+                        <a href="https://x.com/pavolrusnak" target="_blank" rel="noopener noreferrer" class="w-10 h-10 border border-dashed border-neon/50 flex items-center justify-center text-gray-400 hover:text-neon hover:border-neon transition-colors" title="Twitter/X">
+                            <span class="icon icon-x w-5 h-5"></span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/pavolrusnak/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 border border-dashed border-neon/50 flex items-center justify-center text-gray-400 hover:text-neon hover:border-neon transition-colors" title="LinkedIn">
+                            <span class="icon icon-linkedin w-5 h-5"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Lea Petrasova -->
+                <div class="terminal-box p-8 text-center border-glow transition-all">
+                    <img src="images/organizers/lea.png" alt="Lea Petrasova" class="w-36 h-36 rounded-full mx-auto mb-6 object-cover border-2 border-neon/30 bg-white">
+                    <h3 class="text-xl font-bold text-white mb-2">Lea Petrasova</h3>
+                    <p class="text-gray-400 mb-6 text-sm">// President, Vexl Foundation</p>
+
+                    <!-- Social Links -->
+                    <div class="flex justify-center space-x-4">
+                        <a href="https://x.com/leapetras" target="_blank" rel="noopener noreferrer" class="w-10 h-10 border border-dashed border-neon/50 flex items-center justify-center text-gray-400 hover:text-neon hover:border-neon transition-colors" title="Twitter/X">
+                            <span class="icon icon-x w-5 h-5"></span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/leapetras/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 border border-dashed border-neon/50 flex items-center justify-center text-gray-400 hover:text-neon hover:border-neon transition-colors" title="LinkedIn">
+                            <span class="icon icon-linkedin w-5 h-5"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-terminal border-t border-neon/30 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <!-- Brand -->
+                <div>
+                    <span class="text-xl font-bold gradient-text">&gt;_Freedom_Tech_Summit</span>
+                    <p class="text-gray-500 mt-4 text-sm">// A one-day conference for developers, hackers, and freedom tech enthusiasts.</p>
+                    <p class="text-neon/60 mt-2 text-sm">2026-06-10 | PRAGUE, CZE</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-neon font-semibold mb-4">[QUICK_LINKS]</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#about" class="text-gray-500 hover:text-neon transition-colors">&gt; about</a></li>
+                        <li><a href="#tickets" class="text-gray-500 hover:text-neon transition-colors">&gt; tickets</a></li>
+                        <li><a href="#cfp" class="text-gray-500 hover:text-neon transition-colors">&gt; participate</a></li>
+                        <li><a href="#speakers" class="text-gray-500 hover:text-neon transition-colors">&gt; speakers</a></li>
+                        <li><a href="#venue" class="text-gray-500 hover:text-neon transition-colors">&gt; venue</a></li>
+                        <li><a href="#organizers" class="text-gray-500 hover:text-neon transition-colors">&gt; organizers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social -->
+                <div>
+                    <h4 class="text-neon font-semibold mb-4">[CONNECT]</h4>
+                    <div class="flex space-x-4">
+                        <!-- Nostr -->
+                        <a href="https://nostr.com/npub123456789" target="_blank" rel="noopener noreferrer" class="w-10 h-10 border border-dashed border-neon/50 flex items-center justify-center text-gray-400 hover:text-neon hover:border-neon transition-colors">
+                            <span class="icon icon-nostr w-5 h-5"></span>
+                        </a>
+                        <!-- Signal -->
+                        <a href="https://signal.group/#CjQKINAumqiYhOY0lMAkghJAzRZ-hPv3axj5ss0UiB7hUI15EhDVuYt9KuDty3Kq23vjE2wa" target="_blank" rel="noopener noreferrer" class="w-10 h-10 border border-dashed border-neon/50 flex items-center justify-center text-gray-400 hover:text-neon hover:border-neon transition-colors">
+                            <span class="icon icon-signal w-5 h-5"></span>
+                        </a>
+                        <!-- X/Twitter -->
+                        <a href="https://x.com/ft_summit" target="_blank" rel="noopener noreferrer" class="w-10 h-10 border border-dashed border-neon/50 flex items-center justify-center text-gray-400 hover:text-neon hover:border-neon transition-colors">
+                            <span class="icon icon-x w-5 h-5"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile sidebar
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileSidebar = document.getElementById('mobile-sidebar');
+        const closeSidebar = document.getElementById('close-sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+        function openSidebar() {
+            mobileSidebar.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebarFn() {
+            mobileSidebar.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', openSidebar);
+        closeSidebar.addEventListener('click', closeSidebarFn);
+        sidebarOverlay.addEventListener('click', closeSidebarFn);
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', closeSidebarFn);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = 64; // h-16 = 4rem = 64px
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Past speakers data - edit this array to update speakers
+        const pastSpeakers = [
+            {
+                name: "Max Hillebrand",
+                affiliation: "Cypherpunk",
+                photo: "max-hillebrand.png",
+                website: "https://towardsliberty.com",
+                twitter: "https://x.com/HillebrandMax",
+                nostr: "https://njump.me/npub1klkk3vrzme455yh9rl2jshq7rc8dpegj3ndf82c3ks2sk40dxt7qulx3vt"
+            },
+            {
+                name: "Juraj Bednár",
+                affiliation: "Cyphersphere",
+                photo: "juraj-bednar.png",
+                website: "https://juraj.bednar.io",
+                twitter: "https://x.com/jurbed",
+                nostr: "https://njump.me/npub138vecha7chfat4p0ygpdgnekj8ul0ed80g9mry6470svggym5pks47hlh8"
+            },
+            {
+                name: "Calle",
+                affiliation: "Cashu",
+                photo: "calle.png",
+                twitter: "https://x.com/callebtc",
+                github: "https://github.com/callebtc",
+                nostr: "https://njump.me/npub12rv5lskctqxxs2c8rf2zlzc7xx3qpvzs3w4etgemauy9thegr43sf485vg"
+            },
+            {
+                name: "niftynei",
+                affiliation: "bitcoin++",
+                photo: "niftynei.png",
+                twitter: "https://x.com/niftynei",
+                github: "https://github.com/niftynei",
+                website: "https://btcpp.dev"
+            },
+            {
+                name: "Thomas Voegtlin",
+                affiliation: "Electrum",
+                photo: "thomas-voegtlin.png",
+                website: "https://electrum.org",
+                twitter: "https://x.com/ElectrumWallet",
+                github: "https://github.com/ecdsa"
+            },
+            {
+                name: "Roman Zeyde",
+                affiliation: "Trezor",
+                photo: "roman-zeyde.png",
+                website: "https://romanzey.de/",
+                twitter: "https://x.com/roman_zeyde",
+                github: "https://github.com/romanz"
+            },
+            {
+                name: "Josh Datko",
+                affiliation: "Bitpunk.fm",
+                photo: "josh-datko.png",
+                website: "https://zine.bitpunk.fm",
+                twitter: "https://x.com/bitpunkfm",
+                nostr: "https://njump.me/npub1f49twdlzlw667r74jz6t06xxlemd8gp2j7g77l76easpl8jsltvqvlzpez"
+            },
+
+            {
+                name: "b10c",
+                affiliation: "OpenSats Grantee",
+                photo: "b10c.png",
+                website: "https://b10c.me",
+                twitter: "https://x.com/0xb10c",
+                nostr: "https://njump.me/npub1kyxqqqq8n2pu7f5pthr48zqcmr2k52vrud6wxzjpg0jsqcyhs3tshfc6vv"
+            },
+            {
+                name: "Erik De Smedt",
+                affiliation: "Second",
+                photo: "erik-de-smedt.png",
+                website: "https://second.tech",
+                twitter: "https://x.com/ErikDeSmedt"
+            },
+            {
+                name: "Stephan (Emzy) Oeste",
+                affiliation: "Emzy",
+                photo: "emzy.png",
+                website: "https://emzy.de",
+                twitter: "https://x.com/emzy",
+                github: "https://github.com/Emzy",
+                nostr: "https://njump.me/npub1ftd5lukuw2alrak6r87ppyqg5fgp8jpheacjq95h97kszkce2yls5dv5jq"
+            },
+            {
+                name: "Baudoin Collard",
+                affiliation: "Satochip",
+                photo: "baudoin-collard.png",
+                website: "https://satochip.io",
+                twitter: "https://x.com/satochip",
+                github: "https://github.com/Toporin"
+            },
+            {
+                name: "Salvatore Ingala",
+                affiliation: "Ledger",
+                photo: "salvatore-ingala.png",
+                twitter: "https://x.com/salvatoshi",
+                github: "https://github.com/bigspider",
+                nostr: "https://njump.me/npub157y6gz0l0rfhw220rfwnujeff6q2mec33nzkwz23umkrt6482exq8e60gr"
+            },
+            {
+                name: "Rahim Taghizadegan",
+                affiliation: "deedsats",
+                photo: "rahim-taghizadegan.png",
+                website: "https://deedsats.com",
+                twitter: "https://x.com/scholarium_at"
+            },
+            {
+                name: "Walter Maffione",
+                affiliation: "KaleidoSwap",
+                photo: "walter-maffione.png",
+                website: "https://kaleidoswap.com",
+                twitter: "https://x.com/kaleidoswap"
+            },
+            {
+                name: "Tomek K",
+                affiliation: "Alby",
+                photo: "tomek-k.png",
+                website: "https://getalby.com",
+                twitter: "https://x.com/itstomekk",
+                nostr: "https://njump.me/npub14wxtsrj7g2jugh70pfkzjln43vgn4p7655pgky9j9w9d75u465pqvagcye"
+            },
+            {
+                name: "Schnuartz",
+                affiliation: "ClavaStack",
+                photo: "schnuartz.png",
+                website: "https://clavastack.com",
+                twitter: "https://x.com/schnuartz",
+                nostr: "https://njump.me/nprofile1qqsqd5j8wuxlcggg403wqcsxw93x3lqdr947f6luh7j7pfc2kyc9m9qr73wd3"
+            },
+            {
+                name: "Ady Shimony",
+                affiliation: "Developer",
+                photo: "ady-shimony.png",
+                twitter: "https://x.com/adyshimony",
+                github: "https://github.com/adyshimony",
+                nostr: "https://njump.me/npub1gscnj94yvp2rmt84mrwgmk82w9ctlflggu0zlypfpt4fjd7luj5q5dr83a"
+            },
+            {
+                name: "Thomas Farstrike",
+                affiliation: "LightningPiggy",
+                photo: "thomas-farstrike.png",
+                website: "https://lightningpiggy.com",
+                twitter: "https://x.com/LightningPiggy",
+                nostr: "https://primal.net/LightningPiggy"
+            },
+            {
+                name: "Duncan Dean",
+                affiliation: "Btrust",
+                photo: "duncan-dean.png",
+                website: "https://dunxen.dev",
+                twitter: "https://x.com/dunxen",
+                nostr: "https://primal.net/profile/npub1gxr0nutz03u7rgquguq2sk24nzygtvq08a5malyu4epjaxhzae8qfqmjeu"
+            },
+            {
+                name: "Javier Álvarez",
+                affiliation: "RootstockLabs",
+                photo: "javier-alvarez.png",
+                twitter: "https://x.com/javicidf"
+            },
+            {
+                name: "Johnny 9",
+                affiliation: "Bitcoin Core",
+                photo: "johnny-9.png",
+                website: "https://primal.net/johnny9"
+            },
+            {
+                name: "Stephan Vuylsteke",
+                affiliation: "Brink",
+                photo: "stephan-vuylsteke.png",
+                twitter: "https://x.com/stphnvlstk",
+                github: "https://github.com/stickies-v"
+            },
+            {
+                name: "Alena Vranova",
+                affiliation: "GLOK",
+                photo: "alena-vranova.png",
+                website: "https://glok.me",
+                twitter: "https://x.com/alenasatoshi",
+                nostr: "https://njump.me/npub1ymxylj4lc7suuatmczl6etk73s3zl8zlp0qc8q0l3ev6n90lf42qjf6hd8"
+            },
+            {
+                name: "Oren Zomer",
+                affiliation: "Peaceful21",
+                photo: "oren-zomer.png",
+                website: "https://peaceful21.com",
+                twitter: "https://x.com/oren_z0",
+                nostr: "https://njump.me/npub1m48pjyp4gv0dj6sdplnk0pddmwu3lm56pf3pxggxhwk94xpf2wdqhtxndc"
+            },
+            {
+                name: "Tanja Bächle",
+                affiliation: "Nostr advocate",
+                photo: "tanja-bachle.png",
+                nostr: "https://njump.me/npub1hz5alqscpp8yjrvgsdp2n4ygkl8slvstrgvmjca7e45w6644ew7sewtysa"
+            },
+            {
+                name: "Bert de Groot",
+                affiliation: "Bitcoin Brabant",
+                photo: "bert-de-groot.png",
+                website: "https://bitcoinbrabant.com",
+                twitter: "https://x.com/bitcoinbrabant",
+                nostr: "https://njump.me/npub1qvwdl9rp7a5ghrxv57wnml5ehg2whjh708vys6kaxpkgu0z3aclsuy2h4p"
+            },
+            {
+                name: "Federico Tenga",
+                affiliation: "Bitfinex",
+                photo: "federico-tenga.png",
+                website: "https://rgb.info",
+                twitter: "https://x.com/FedericoTenga"
+            },
+            {
+                name: "Jose AP",
+                affiliation: "Clovr Labs",
+                photo: "jose-ap.png",
+                website: "https://app.40swap.com",
+                github: "https://github.com/Jossec101",
+                nostr: "https://njump.me/npub1jy8dun6khtudzzh3ucevznkgya5ssm9tahkup6y4kxa84anya70qlvyap8"
+            },
+            {
+                name: "Nathan Day",
+                affiliation: "BTC Map",
+                photo: "nathan-day.png",
+                website: "https://btcmap.org",
+                twitter: "https://x.com/nathan_day",
+                nostr: "https://njump.me/npub1cn670f663n3ks02jnnlsvd5y88zjnefy8343ykaxs7y3nzzketrsrjwt8a"
+            },
+            {
+                name: "Ross Savage",
+                affiliation: "Breez",
+                photo: "ross-savage.png",
+                twitter: "https://x.com/Ross_Savage_",
+                github: "https://github.com/dangeross",
+                nostr: "https://njump.me/npub1843vrzwjj8dadctcny99lu489ge2ldtq8an7qpez0vru7lgpn53sy9j33n"
+            },
+            {
+                name: "ghost43",
+                affiliation: "Electrum",
+                photo: "ghost43.png",
+                github: "https://github.com/ghost43"
+            },
+            {
+                name: "Daniel Steigerwald",
+                affiliation: "Evolu",
+                photo: "daniel-steigerwald.png",
+                website: "https://evolu.dev",
+                twitter: "https://x.com/steida"
+            },
+            {
+                name: "Alekos Filini",
+                affiliation: "TwentyTwo",
+                photo: "alekos-filini.png",
+                website: "https://twenty-two.xyz",
+                twitter: "https://x.com/afilini",
+                github: "https://github.com/afilini"
+            },
+            {
+                name: "Marco Argentieri",
+                affiliation: "Ark Labs",
+                photo: "marco-argentieri.png",
+                twitter: "https://x.com/tierotiero",
+                github: "https://github.com/tiero",
+                nostr: "https://njump.me/npub1w4sf3hsedukh33akdn5duld2yc5jlk6s02shur8553j0a59sm3jscws08a"
+            },
+            {
+                name: "Philipp Hoenisch",
+                affiliation: "Lendasat",
+                photo: "philipp-hoenisch.png",
+                twitter: "https://x.com/bonomat",
+                github: "https://github.com/bonomat",
+                nostr: "https://njump.me/npub1tthrhn3mc8k6c72rn6uwfnclnlk6hcsg7lr60xfc0w3jlnxgy4jqmf5yzk"
+            },
+            {
+                name: "Carlos García Ortiz",
+                affiliation: "Bleskomat & SatoshiLabs",
+                photo: "carlos-garcia-ortiz.png",
+                website: "https://karliatto.com",
+                twitter: "https://x.com/karliatto",
+                github: "https://github.com/karliatto",
+                nostr: "https://njump.me/npub1fcthj78n5re7dcyrva89gmvgz0z6g2v5rakr65shxemyvjwwdjzqcpeavj"
+            },
+            {
+                name: "Djuri Baars",
+                affiliation: "BTClock",
+                photo: "djuri-baars.png",
+                website: "https://btclock.store",
+                twitter: "https://x.com/dsbaars",
+                github: "https://github.com/dsbaars",
+                nostr: "https://njump.me/djuri@btclock.dev"
+            },
+            {
+                name: "Vincenzo Palazzo",
+                affiliation: "Ocean",
+                photo: "vincenzo-palazzo.png",
+                twitter: "https://x.com/PalazzoVincenzo",
+                github: "https://github.com/vincenzopalazzo"
+            },
+            {
+                name: "Martin Habovštiak",
+                affiliation: "Programmer",
+                photo: "martin-habovstiak.png",
+                twitter: "https://x.com/Kixunil",
+                github: "https://github.com/kixunil"
+            },
+            {
+                name: "Jameson Lopp",
+                affiliation: "Cypherpunk",
+                photo: "jameson-lopp.jpg"
+            },
+            {
+                name: "Oliver Gugger",
+                affiliation: "LND",
+                photo: "oliver-gugger.jpg"
+            },
+            {
+                name: "Kalle Rosenbaum",
+                affiliation: "Popeller",
+                photo: "kalle-rosenbaum.jpg"
+            },
+            {
+                name: "Rigel Walshe",
+                affiliation: "Metalhead",
+                photo: "rigel-walshe.jpg"
+            },
+            {
+                name: "Peter Todd",
+                affiliation: "Cryptochronomancer",
+                photo: "peter-todd.png",
+                website: "https://petertodd.org/",
+                twitter: "https://x.com/peterktodd",
+                github: "https://github.com/petertodd",
+                nostr: "https://njump.me/npub1ej493cmun8y9h3082spg5uvt63jgtewneve526g7e2urca2afrxqm3ndrm"
+            },
+            {
+                name: "Henrik Skogstrøm",
+                affiliation: "LN Capital",
+                photo: "henrik-skogstrom.jpg"
+            },
+            {
+                name: "Pierre Corbin",
+                affiliation: "Flash",
+                photo: "pierre-corbin.png",
+                twitter: "https://x.com/CierrePorbin",
+                nostr: "https://njump.me/npub1g94rtrgmyez0wedejp2p5kjavlxcutznmltecwepjeukng7d5t6szwv342"
+            },
+            {
+                name: "Calvin Kim",
+                affiliation: "Utreexo",
+                photo: "calvin-kim.png",
+                website: "http://kcalvinalvin.info/",
+                twitter: "https://x.com/kcalvinalvinn",
+                github: "https://github.com/kcalvinalvin"
+            },
+            {
+                name: "Igor Korsakov",
+                affiliation: "BlueWallet",
+                photo: "igor-korsakov.jpg"
+            },
+            {
+                name: "Christian Lewe",
+                affiliation: "Simplicity",
+                photo: "christian-lewe.jpg"
+            },
+            {
+                name: "Tobin C. Harding",
+                affiliation: "rust-bitcoin",
+                photo: "tobin-c-harding.jpg"
+            },
+            {
+                name: "Ioni Appelberg",
+                affiliation: "Philosopher",
+                photo: "ioni-appelberg.png",
+                website: "https://www.ioniappelberg.com/",
+                twitter: "https://x.com/ioniappelberg"
+            },
+            {
+                name: "David Goulet",
+                affiliation: "Tor",
+                photo: "david-goulet.jpg"
+            },
+            {
+                name: "Julio Garcia",
+                affiliation: "Mintter",
+                photo: "julio-garcia.jpg"
+            },
+            {
+                name: "Horacio Herrera",
+                affiliation: "Mintter",
+                photo: "horacio-herrera.jpg"
+            },
+            {
+                name: "Elsirion",
+                affiliation: "Fedimint",
+                photo: "elsirion.png",
+                website: "https://fedimint.org/",
+                twitter: "https://x.com/EricSirion",
+                nostr: "https://njump.me/npub1nc0ynppqh37rtulr57xjqpzmfjp58xrd4ey8896ehn9j5flg33fszrz5pa"
+            },
+            {
+                name: "Conor Okus",
+                affiliation: "Spiral",
+                photo: "conor-okus.jpg"
+            },
+            {
+                name: "Peter Young",
+                affiliation: "Free Cities Foundation",
+                photo: "peter-young.jpg"
+            },
+            {
+                name: "Ben Arc",
+                affiliation: "LNbits",
+                photo: "ben-arc.png",
+                twitter: "https://x.com/arcbtc",
+                github: "https://github.com/arcbtc",
+                nostr: "https://njump.me/npub1c878wu04lfqcl5avfy3p5x83ndpvedaxv0dg7pxthakq3jqdyzcs2n8avm"
+            },
+            {
+                name: "Vlad Stan",
+                affiliation: "LNbits",
+                photo: "vlad-stan.jpg"
+            },
+            {
+                name: "Yvette",
+                affiliation: "LNbits",
+                photo: "yvette.jpg"
+            },
+            {
+                name: "Aljaz Ceru",
+                affiliation: "bolt.observer",
+                photo: "aljaz-ceru.jpg"
+            },
+            {
+                name: "Jesse De Wit",
+                affiliation: "Breez",
+                photo: "jesse-de-wit.png",
+                twitter: "https://x.com/WitDeJesse",
+                github: "https://github.com/JssDWt",
+                nostr: "https://njump.me/npub18hwpk5qep3ptnmzatq22ptwr9mth7ccrku56rdntwpxjxlkfyr2qrav8du"
+            },
+            {
+                name: "Gloria Zhao",
+                affiliation: "Bitcoin Core",
+                photo: "gloria-zhao.jpg"
+            },
+            {
+                name: "Michael Bumann",
+                affiliation: "Alby",
+                photo: "michael-bumann.jpg"
+            },
+            {
+                name: "Roy Sheinfeld",
+                affiliation: "Breez",
+                photo: "roy-sheinfeld.png"
+            },
+            {
+                name: "Gabo Beaumont",
+                affiliation: "Seed Hypermedia",
+                photo: "gabo-beaumont.jpg"
+            },
+            {
+                name: "William Casarin",
+                affiliation: "Damus",
+                photo: "william-casarin.jpg"
+            },
+            {
+                name: "Hennadii Stepanov",
+                affiliation: "Bitcoin Core",
+                photo: "hennadii-stepanov.png",
+                twitter: "https://x.com/hhebasto",
+                github: "https://github.com/hebasto"
+            },
+            {
+                name: "Carla Kirk-Cohen",
+                affiliation: "Chaincode Labs",
+                photo: "carla-kirk-cohen.png",
+                twitter: "https://x.com/actuallyCarlaKC"
+            },
+            {
+                name: "softsimon",
+                affiliation: "mempool.space",
+                photo: "softsimon.png",
+                website: "https://mempool.space/",
+                twitter: "https://x.com/softsimon_",
+                github: "https://github.com/softsimon",
+                nostr: "https://njump.me/npub1hvw02fgyxhl5whxckv4vkglraeamar7r3a54zuztg7v9zw28vukq5a5e8q"
+            },
+            {
+                name: "michael1011",
+                affiliation: "Boltz",
+                photo: "michael1011.png",
+                github: "https://github.com/michael1011",
+                nostr: "https://njump.me/npub18hxp27srqnkzd6snrg85u4mw9kn8lawxdxqff8z4h4lshvd4a7ssmtxks4"
+            },
+            {
+                name: "Tony Klausing",
+                affiliation: "Stable Channels",
+                photo: "tony-klausing.png",
+                twitter: "https://x.com/tonklaus",
+                github: "https://github.com/toneloc"
+            },
+            {
+                name: "Avi Burra",
+                affiliation: "Casa Nostra",
+                photo: "avi-burra.png",
+                twitter: "https://x.com/avi_burra",
+                nostr: "https://njump.me/npub1hqaz3dlyuhfqhktqchawke39l92jj9nt30dsgh2zvd9z7dv3j3gqpkt56s"
+            },
+            {
+                name: "Derek Ross",
+                affiliation: "Nostr",
+                photo: "derek-ross.png",
+                website: "https://nostrplebs.com/",
+                twitter: "https://x.com/derekmross",
+                nostr: "https://njump.me/npub18ams6ewn5aj2n3wt2qawzglx9mr4nzksxhvrdc4gzrecw7n5tvjqctp424"
+            },
+            {
+                name: "Jordi Montes",
+                affiliation: "Fewsats",
+                photo: "jordi-montes.png",
+                twitter: "https://x.com/positiveblue2",
+                github: "https://github.com/positiveblue",
+                nostr: "https://njump.me/npub1hlr2lqjyms59nm7l6r5p56ne7nhrjk783t9nyq4k72r6rj36y7es7ysjwf"
+            },
+            {
+                name: "Antoine Poinsot",
+                affiliation: "Chaincode Labs",
+                photo: "antoine-poinsot.png",
+                twitter: "https://x.com/darosior",
+                github: "https://github.com/darosior"
+            },
+            {
+                name: "pretyflaco",
+                affiliation: "Blink",
+                photo: "pretyflaco.png",
+                twitter: "https://x.com/_pretyflaco",
+                nostr: "https://njump.me/npub1flac02t5hw6jljk8x7mec22uq37ert8d3y3mpwzcma726g5pz4lsmfzlk6"
+            },
+            {
+                name: "openoms",
+                affiliation: "RaspiBlitz",
+                photo: "openoms.png",
+                twitter: "https://x.com/openoms",
+                github: "https://github.com/openoms",
+                nostr: "https://njump.me/npub14tq8m9ggnnn2muytj9tdg0q6f26ef3snpd7ukyhvrxgq33vpnghs8shy62"
+            },
+            {
+                name: "rootzoll",
+                affiliation: "RaspiBlitz",
+                photo: "rootzoll.png",
+                twitter: "https://x.com/rootzoll",
+                github: "https://github.com/rootzoll",
+                nostr: "https://njump.me/npub169jd0rqttrk7kgk4f9pveuhcz4d7lfzacr3hzlxplqws7yf52xlsqr5ua8"
+            },
+            {
+                name: "Charles Hill",
+                affiliation: "Bleskomat",
+                photo: "charles-hill.png",
+                twitter: "https://x.com/thechill117",
+                github: "https://github.com/chill117"
+            },
+            {
+                name: "Rogzy",
+                affiliation: "Découvre Bitcoin",
+                photo: "rogzy.png",
+                twitter: "https://x.com/Rogzy_DB"
+            },
+            {
+                name: "Miljan Braticevic",
+                affiliation: "Primal",
+                photo: "miljan-braticevic.png",
+                website: "https://primal.net/",
+                twitter: "https://x.com/mbraticevic",
+                github: "https://github.com/PrimalHQ",
+                nostr: "https://njump.me/npub16c0nh3dnadzqpm76uctf5hqhe2lny344zsmpm6feee9p5rdxaa9q586nvr"
+            },
+            {
+                name: "Aleks Svetski",
+                affiliation: "Satlantis",
+                photo: "aleks-svetski.png",
+                website: "https://svetski.info/",
+                twitter: "https://x.com/SvetskiWrites",
+                nostr: "https://njump.me/npub1dtgg8yk3h23ldlm6jsy79tz723p4sun9mz62tqwxqe7c363szkzqm8up6m"
+            },
+            {
+                name: "Calvadev",
+                affiliation: "Shopstr",
+                website: "https://calva.dev",
+                photo: "calvadev.png",
+                nostr: "https://njump.me/npub16dhgpql60vmd4mnydjut87vla23a38j689jssaqlqqlzrtqtd0kqex0nkq"
+            },
+            {
+                name: "Christian Decker",
+                affiliation: "Blockstream",
+                photo: "christian-decker.png",
+                twitter: "https://x.com/Snyke"
+            },
+            {
+                name: "Christoph Ono",
+                affiliation: "Bitcoin.design",
+                photo: "christoph-ono.png",
+                website: "http://germanysbestkeptsecret.com/",
+                twitter: "https://x.com/GBKS",
+                github: "https://github.com/GBKS",
+                nostr: "https://njump.me/npub1kuc70777tsvj67fl75s2dmy376t97hv05xmyuyshzzy6vhj5q5jstv0eyw"
+            },
+            {
+                name: "Erik Cativo",
+                affiliation: "Bitcoin.design",
+                photo: "erik-cativo.png",
+                website: "https://www.erik.day",
+                twitter: "https://x.com/uxerik_"
+            },
+            {
+                name: "gsoverignity",
+                affiliation: "Nostrovia",
+                photo: "gsoverignity.png",
+                nostr: "https://njump.me/npub1mygerccwqpzyh9pvp6pv44rskv40zutkfs38t0hqhkvnwlhagp6s3psn5p"
+            },
+            {
+                name: "Johns Beharry",
+                affiliation: "Peak Shift",
+                photo: "johns-beharry.png",
+                website: "https://peakshift.com/",
+                twitter: "https://x.com/johnsBeharry",
+                github: "https://github.com/johnsbeharry",
+                nostr: "https://njump.me/npub1shhm32q4zkunmwd0s20z7e6qlwkju7akku7ezte9feajmyhum3jsvy56zk"
+            },
+            {
+                name: "Kieran",
+                affiliation: "Zapstream",
+                photo: "kieran.png",
+                nostr: "https://njump.me/npub1v0lxxxxutpvrelsksy8cdhgfux9l6a42hsj2qzquu2zk7vc9qnkszrqj49"
+            },
+            {
+                name: "Martti Malmi",
+                affiliation: "Nostr",
+                photo: "martti-malmi.png",
+                twitter: "https://x.com/marttimalmi",
+                github: "https://github.com/mmalmi",
+                nostr: "https://njump.me/npub1g53mukxnjkcmr94fhryzkqutdz2ukq4ks0gvy5af25rgmwsl4ngq43drvk"
+            },
+            {
+                name: "Michael Haase",
+                affiliation: "Bitcoin.design",
+                photo: "michael-haase.png",
+                website: "https://michaelhaase.design/",
+                twitter: "https://x.com/haasemike",
+                github: "https://github.com/rabbitholiness"
+            },
+            {
+                name: "Mogashni Naidoo",
+                affiliation: "Bitcoin.design",
+                photo: "mogashni-naidoo.png",
+                website: "https://www.moux.design/",
+                twitter: "https://x.com/MouxDesign"
+            },
+            {
+                name: "Pablof7z",
+                affiliation: "Sanity Island",
+                photo: "pablof7z.png",
+                nostr: "https://njump.me/npub1l2vyh47mk2p0qlsku7hg0vn29faehy9hy34ygaclpn66ukqp3afqutajft"
+            },
+            {
+                name: "Patricia",
+                affiliation: "Lipa",
+                photo: "patricia.png",
+                website: "https://lipa.swiss/en/",
+                twitter: "https://x.com/snigsnagsnug",
+                nostr: "https://njump.me/npub1um4hl4w9x6kpcelzs7wp0px72v0swtxnq2jy4rntlfufjrwcmglskaryrz"
+            },
+            {
+                name: "Paulo Sacramento",
+                affiliation: "Bitcoin.design",
+                photo: "paulo-sacramento.png",
+                website: "https://www.psacramento.com/",
+                twitter: "https://x.com/paulosacramento"
+            },
+            {
+                name: "Pavol Rusnak",
+                affiliation: "SatoshiLabs",
+                photo: "pavol-rusnak.png",
+                website: "https://rusnak.io/",
+                twitter: "https://x.com/pavolrusnak",
+                github: "https://github.com/prusnak"
+            },
+            {
+                name: "Ralf",
+                affiliation: "Lipa",
+                photo: "ralf.png",
+                website: "https://lipa.swiss/en/",
+                twitter: "https://x.com/dimianovic"
+            },
+            {
+                name: "Rockstar Dev",
+                affiliation: "BTCPay Server",
+                photo: "rockstar-dev.png",
+                twitter: "https://x.com/r0ckstardev",
+                github: "https://github.com/rockstardev",
+                nostr: "https://njump.me/npub1j8y6tcdfw3q3f3h794s6un0gyc5742s0k5h5s2yqj0r70cpklqeqjavrvg"
+            },
+            {
+                name: "Simon Smith",
+                affiliation: "Fanfares",
+                photo: "simon-smith.png",
+                nostr: "https://njump.me/npub1md39ua3h2s7204a7v5p9sdxmxx9qc7m4kr3r6naeuwfznad6d7nsxpctp9"
+            },
+            {
+                name: "Sjors Provoost",
+                affiliation: "Bitcoin Core",
+                photo: "sjors-provoost.png",
+                website: "https://sprovoost.nl/",
+                twitter: "https://x.com/provoost",
+                nostr: "https://njump.me/npub1s6z7hmmx2vud66f3utxd70qem8cwtggx0jgc7gh8pqwz2k8cltuqrdwk4c"
+            },
+            {
+                name: "Yashraj",
+                affiliation: "Bitcoin.design",
+                photo: "yashraj.png",
+                twitter: "https://x.com/yashraj__",
+                nostr: "https://njump.me/npub1yashrajtj3ddn9u2ypzalp4qew4f9u8wls0tpf5kuvqarenqwckql8adnu"
+            },
+            {
+                name: "Zach Meyer",
+                affiliation: "Frost",
+                photo: "zach-meyer.png",
+                website: "https://www.zach.my",
+                nostr: "https://njump.me/npub1zach44xjpc4yyhx6pgse2cj2pf98838kja03dv2e8ly8lfr094vqvm5dy5",
+                github: "https://github.com/zmeyer44"
+            },
+            {
+                name: "Ketominer",
+                affiliation: "Nodl",
+                photo: "ketominer.jpg",
+                twitter: "https://x.com/ketominer"
+            },
+            {
+                name: "Kevin Loaec",
+                affiliation: "wizardsardine",
+                photo: "kevin-loaec.jpg",
+                twitter: "https://x.com/kloaec",
+                github: "https://github.com/kloaec"
+            },
+            {
+                name: "Evan Linjin",
+                affiliation: "Bitcoin Dev Kit",
+                photo: "evan-linjin.jpg",
+                twitter: "https://x.com/evanlinjin",
+                github: "https://github.com/evanlinjin"
+            },
+            {
+                name: "Daniela Brozzoni",
+                affiliation: "Bitcoin Dev Kit",
+                photo: "daniela-brozzoni.png",
+                website: "https://danielabrozzoni.com",
+                twitter: "https://x.com/danielabrozzoni",
+                github: "https://github.com/danielabrozzoni"
+            },
+            {
+                name: "Elias Rohrer",
+                affiliation: "Spiral",
+                photo: "elias-rohrer.jpg",
+                twitter: "https://x.com/_tnull"
+            },
+            {
+                name: "Timothy Allen",
+                affiliation: "Free Cities Foundation",
+                photo: "timothy-allen.jpg",
+                website: "https://anchor.fm/the-free-cities-pod",
+                twitter: "https://x.com/MrTimothyAllen"
+            },
+            {
+                name: "Evan Kaloudis",
+                affiliation: "Zeus",
+                photo: "evan-kaloudis.jpg",
+                twitter: "https://x.com/evankaloudis",
+                github: "https://github.com/kaloudis"
+            },
+            {
+                name: "Kwinten De Backer",
+                affiliation: "Alby",
+                photo: "kwinten-de-backer.jpg",
+                website: "https://kwintendebacker.com",
+                github: "https://github.com/kiwiidb"
+            },
+            {
+                name: "Josibake",
+                affiliation: "Bitcoin Core",
+                photo: "josibake.jpg",
+                website: "http://josibake.io",
+                twitter: "https://x.com/josibake",
+                github: "https://github.com/josibake"
+            },
+            {
+                name: "Édouard Paris",
+                affiliation: "wizardsardine",
+                photo: "edouard-paris.jpg",
+                website: "https://edouard.paris",
+                twitter: "https://x.com/edouardparis",
+                github: "https://github.com/edouardparis"
+            },
+            {
+                name: "Christoph Stenglein",
+                affiliation: "RaspiBlitz",
+                photo: "christoph-stenglein.jpg",
+                website: "https://www.cstenglein.com",
+                github: "https://github.com/cstenglein"
+            },
+            {
+                name: "Rikki",
+                affiliation: "Bitcoin Explorers",
+                photo: "rikki.png",
+            },
+            {
+                name: "Laura",
+                affiliation: "Bitcoin Explorers",
+                photo: "laura.jpg",
+            },
+            {
+                name: "Anders Jensen",
+                affiliation: "MC",
+                photo: "anders-jensen.png",
+            },
+            {
+                name: "Stephan Livera",
+                affiliation: "MC",
+                photo: "stephan-livera.png",
+            },
+            {
+                name: "Joe Nakamoto",
+                affiliation: "MC",
+                photo: "joe-nakamoto.png",
+            }
+        ];
+
+        // Past projects data - edit this array to update projects
+        const pastProjects = [
+            {
+                name: "Bitcoin Core",
+                logo: "bitcoincore.png",
+                website: "https://bitcoincore.org"
+            },
+            {
+                name: "Nostr",
+                logo: "nostr.png",
+                website: "https://nostr.com"
+            },
+            {
+                name: "bitcoin.design",
+                logo: "bitcoindesign.png",
+                website: "https://bitcoin.design"
+            },
+            {
+                name: "Cashu",
+                logo: "cashu.png",
+                website: "https://cashu.space"
+            },
+            {
+                name: "BTCPay Server",
+                logo: "btcpayserver.png",
+                website: "https://btcpayserver.org"
+            },
+            {
+                name: "mempool.space",
+                logo: "mempool.png",
+                website: "https://mempool.space"
+            },
+            {
+                name: "Wasabi Wallet",
+                logo: "wasabi.png",
+                website: "https://wasabiwallet.io"
+            },
+            {
+                name: "LNbits",
+                logo: "lnbits.png",
+                website: "https://lnbits.com"
+            },
+
+
+
+
+
+
+
+
+
+
+
+            {
+                name: "Electrum",
+                logo: "electrum.png",
+                website: "https://electrum.org"
+            },
+            {
+                name: "Boltz",
+                logo: "boltz.png",
+                website: "https://boltz.exchange"
+            },
+            {
+                name: "Blink",
+                logo: "blink.png",
+                website: "https://blink.sv"
+            },
+            {
+                name: "Ark",
+                logo: "ark.png",
+                website: "https://arkdev.info"
+            },
+            {
+                name: "Electrs",
+                logo: "electrs.png",
+                website: "https://github.com/romanz/electrs"
+            },
+            {
+                name: "Utreexo",
+                logo: "utreexo.png",
+                website: "https://dci.mit.edu/utreexo"
+            },
+            {
+                name: "RaspiBlitz",
+                logo: "raspiblitz.png",
+                website: "https://raspiblitz.org"
+            },
+            {
+                name: "Stratum V2",
+                logo: "stratum.png",
+                website: "https://stratumprotocol.org"
+            },
+            {
+                name: "Trezor",
+                logo: "trezor.png",
+                website: "https://trezor.io"
+            },
+            {
+                name: "TwentyTwo",
+                logo: "twentytwo.png",
+                website: "https://twenty-two.xyz"
+            },
+            {
+                name: "Bleskomat",
+                logo: "bleskomat.png",
+                website: "https://bleskomat.com"
+            },
+            {
+                name: "Tor Project",
+                logo: "tor-project.png",
+                website: "https://www.torproject.org"
+            },
+            {
+                name: "Fedimint",
+                logo: "fedimint.png",
+                website: "https://fedimint.org"
+            },
+            {
+                name: "Liquid",
+                logo: "liquid.png",
+                website: "https://liquid.net"
+            },
+            {
+                name: "Zeus",
+                logo: "zeus.png",
+                website: "https://zeusln.app"
+            },
+            {
+                name: "LND",
+                logo: "lnd.png",
+                website: "https://lightning.engineering"
+            },
+            {
+                name: "BlueWallet",
+                logo: "bluewallet.png",
+                website: "https://bluewallet.io"
+            },
+            {
+                name: "Alby",
+                logo: "alby.png",
+                website: "https://getalby.com"
+            },
+            {
+                name: "Bitcoin Dev Kit",
+                logo: "bdk.png",
+                website: "https://bitcoindevkit.org"
+            },
+            {
+                name: "Lightning Dev Kit",
+                logo: "ldk.png",
+                website: "https://lightningdevkit.org"
+            },
+            {
+                name: "Free Cities Foundation",
+                logo: "free-cities-foundation.png",
+                website: "https://free-cities.org"
+            },
+            {
+                name: "Breez",
+                logo: "breez.png",
+                website: "https://breez.technology"
+            },
+            {
+                name: "bolt.observer",
+                logo: "bolt-observer.png",
+                website: "https://bolt.observer"
+            },
+            {
+                name: "Start9",
+                logo: "start9.png",
+                website: "https://start9.com"
+            },
+            {
+                name: "PlebTag",
+                logo: "plebtag.png",
+                website: "https://plebtag.com"
+            },
+            {
+                name: "Nodl",
+                logo: "nodl.png",
+                website: "https://www.nodl.eu"
+            }
+        ];
+
+        // Render speakers (show only first 8 initially)
+        const speakersGrid = document.getElementById('speakers-grid');
+        const speakersShowMore = document.getElementById('speakers-show-more');
+        const INITIAL_SPEAKERS = 4;
+
+        pastSpeakers.forEach((speaker, index) => {
+            const speakerCard = document.createElement('div');
+            speakerCard.className = 'terminal-box p-4 text-center border-glow transition-all';
+            if (index >= INITIAL_SPEAKERS) {
+                speakerCard.classList.add('hidden');
+                speakerCard.dataset.hidden = 'true';
+            }
+            speakerCard.innerHTML = `
+                <img src="images/speakers/${speaker.photo}" alt="${speaker.name}" class="${speaker.photo.endsWith('.jpg') ? 'speaker-photo ' : ''}w-36 h-36 rounded-full mx-auto mb-3 object-cover border-2 border-neon/30 bg-white">
+                <h4 class="text-sm font-bold text-white mb-1">${speaker.name}</h4>
+                <p class="text-gray-400 mb-3 text-xs">// ${speaker.affiliation}</p>
+                <div class="flex justify-center space-x-2">
+                    ${speaker.website ? `<a href="${speaker.website}" target="_blank" rel="noopener noreferrer" class="w-7 h-7 border border-dashed border-neon/50 flex items-center justify-center text-gray-400 hover:text-neon hover:border-neon transition-colors" title="Website">
+                        <span class="icon icon-website w-3 h-3"></span>
+                    </a>` : ''}
+                    ${speaker.twitter ? `<a href="${speaker.twitter}" target="_blank" rel="noopener noreferrer" class="w-7 h-7 border border-dashed border-neon/50 flex items-center justify-center text-gray-400 hover:text-neon hover:border-neon transition-colors" title="X/Twitter">
+                        <span class="icon icon-x w-3 h-3"></span>
+                    </a>` : ''}
+                    ${speaker.github ? `<a href="${speaker.github}" target="_blank" rel="noopener noreferrer" class="w-7 h-7 border border-dashed border-neon/50 flex items-center justify-center text-gray-400 hover:text-neon hover:border-neon transition-colors" title="GitHub">
+                        <span class="icon icon-github w-3 h-3"></span>
+                    </a>` : ''}
+                    ${speaker.nostr ? `<a href="${speaker.nostr}" target="_blank" rel="noopener noreferrer" class="w-7 h-7 border border-dashed border-neon/50 flex items-center justify-center text-gray-400 hover:text-neon hover:border-neon transition-colors" title="Nostr">
+                        <span class="icon icon-nostr w-3 h-3"></span>
+                    </a>` : ''}
+                </div>
+            `;
+            speakersGrid.appendChild(speakerCard);
+        });
+
+        // Show "Show More" button if there are more than 8 speakers
+        if (pastSpeakers.length > INITIAL_SPEAKERS) {
+            speakersShowMore.classList.remove('hidden');
+        }
+
+        // Render projects (show only first 8 initially)
+        const projectsGrid = document.getElementById('projects-grid');
+        const projectsShowMore = document.getElementById('projects-show-more');
+        const INITIAL_PROJECTS = 4;
+
+        pastProjects.forEach((project, index) => {
+            const projectCard = document.createElement('div');
+            projectCard.className = 'terminal-box p-4 text-center border-glow transition-all';
+            if (index >= INITIAL_PROJECTS) {
+                projectCard.classList.add('hidden');
+                projectCard.dataset.hidden = 'true';
+            }
+            projectCard.innerHTML = `
+                <a href="${project.website}" target="_blank" rel="noopener noreferrer" class="block">
+                    <img src="images/projects/${project.logo}" alt="${project.name}" class="w-32 h-32 mx-auto mb-3 object-contain border border-dashed border-neon/30 p-2 bg-white">
+                    <h4 class="text-sm font-bold text-white mb-1">${project.name}</h4>
+                    <span class="text-neon text-xs hover:text-neon/80 transition-colors">[${project.website.replace('https://', '').split('/')[0]}]</span>
+                </a>
+            `;
+            projectsGrid.appendChild(projectCard);
+        });
+
+        // Show "Show More" button if there are more than 8 projects
+        if (pastProjects.length > INITIAL_PROJECTS) {
+            projectsShowMore.classList.remove('hidden');
+        }
+
+        // Show more speakers function
+        function showMoreSpeakers() {
+            const hiddenCards = speakersGrid.querySelectorAll('[data-hidden="true"]');
+            hiddenCards.forEach(card => {
+                card.classList.remove('hidden');
+                card.dataset.hidden = 'false';
+            });
+            speakersShowMore.classList.add('hidden');
+        }
+
+        // Show more projects function
+        function showMoreProjects() {
+            const hiddenCards = projectsGrid.querySelectorAll('[data-hidden="true"]');
+            hiddenCards.forEach(card => {
+                card.classList.remove('hidden');
+                card.dataset.hidden = 'false';
+            });
+            projectsShowMore.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
