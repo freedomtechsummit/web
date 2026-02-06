@@ -151,6 +151,11 @@
             filter: grayscale(100%) contrast(200%) brightness(250%);
         }
 
+        /* Project logo filter */
+        .project-logo {
+            filter: grayscale(100%);
+        }
+
         /* Terminal box styling */
         .terminal-box {
             border: 1px dashed #00ff41;
@@ -1807,7 +1812,7 @@
             }
             projectCard.innerHTML = `
                 <a href="${project.website}" target="_blank" rel="noopener noreferrer" class="block">
-                    <img src="images/projects/${project.logo}" alt="${project.name}" class="w-32 h-32 mx-auto mb-3 object-contain border border-dashed border-neon/30 p-2 bg-white">
+                    <img src="images/projects/${project.logo}" alt="${project.name}" class="project-logo w-32 h-32 mx-auto mb-3 object-contain border border-dashed border-neon/30 p-2 bg-white">
                     <h4 class="text-sm font-bold text-white mb-1">${project.name}</h4>
                     <span class="text-neon text-xs hover:text-neon/80 transition-colors">[${project.website.replace('https://', '').split('/')[0]}]</span>
                 </a>
